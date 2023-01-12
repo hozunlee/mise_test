@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect } from "react";
+import Nav from "./components/Nav";
+import Status from "./components/Status";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        (async () => {
+            try {
+                //FIXME Cors error
+                const res = await axios.get(
+                    `https://r0twvje5g7.execute-api.ap-northeast-2.amazonaws.com/TEST/fetest`
+                );
+                console.log("res :>> ", res);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, []);
+    return (
+        <div className="bg-red-100">
+            메인
+            <Nav />
+            <Status />
+        </div>
+    );
 }
 
 export default App;
