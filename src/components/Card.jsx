@@ -8,44 +8,13 @@ import CardButton from "./CardButton";
 import { doingState } from "../utils/store";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-const Card = ({ data }) => {
+const Card = ({ data, onClick, BUTTONS }) => {
     const [doing, setDoing] = useRecoilState(doingState);
     const [isTrans, setIsTrans] = useState(true);
 
     const onTrans = () => {
         setIsTrans((prev) => !prev);
     };
-
-    const onClickXandOBtn = (target) => {
-        const targetIndex = doing.findIndex(
-            (target) => target.word === data.word
-        );
-        let temp = [...doing];
-        temp[targetIndex] = {
-            ...temp[targetIndex],
-            [target]: data.x_count + 1,
-        };
-        setDoing(temp);
-    };
-
-    const BUTTONS = [
-        {
-            id: 0,
-            title: "X",
-            target: "x_count",
-        },
-        {
-            id: 1,
-            title: "O",
-            target: "o_count",
-        },
-        {
-            id: 2,
-            title: "암기완료",
-            onClick: null,
-            round: "rounded-r-lg",
-        },
-    ];
 
     return (
         // <div className="border-4 flex  h-16 rounded-xl">
@@ -84,12 +53,15 @@ const Card = ({ data }) => {
                 </div>
             </SwiperSlide>
             <SwiperSlide className="!w-3/4 flex justify-between items-center h-full">
-                {BUTTONS.map((item) => (
-                    <CardButton
-                        key={item.id}
-                        button={item}
-                        onClick={onClickXandOBtn}
-                    />
+                {BUTTONS?.map((item) => (
+                    <div key={item.id}>
+                        <button
+                            onClick={() => onClick(item.target, data.word)}
+                            className="w-full h-full"
+                        >
+                            {item.title}
+                        </button>
+                    </div>
                 ))}
             </SwiperSlide>
         </Swiper>

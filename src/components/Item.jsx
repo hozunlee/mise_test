@@ -5,13 +5,41 @@ import Card from "./Card";
 
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
-    console.log("🚀 ~ file: Item.jsx:8 ~ Item ~ doing", doing);
     const [done, setDone] = useRecoilState(doneState);
     const [taps, setTaps] = useState(true);
 
-    const tapClick = (e) => {
+    const tapClick = () => {
         setTaps((prev) => !prev);
     };
+
+    const onClickXandOBtn = (targetkey, target) => {
+        const targetIndex = doing.findIndex((item) => item.word === target);
+        let temp = [...doing];
+        temp[targetIndex] = {
+            ...temp[targetIndex],
+            [targetkey]: temp[targetIndex][targetkey] + 1,
+        };
+        setDoing(temp);
+    };
+
+    const BUTTONS = [
+        {
+            id: 0,
+            title: "X",
+            target: "x_count",
+        },
+        {
+            id: 1,
+            title: "O",
+            target: "o_count",
+        },
+        {
+            id: 2,
+            title: "암기완료",
+            onClick: null,
+            round: "rounded-r-lg",
+        },
+    ];
 
     return (
         <div>
@@ -31,7 +59,14 @@ const Item = () => {
             </div>
             {taps
                 ? doing.length > 0 &&
-                  doing.map((item) => <Card key={item.word} data={item} />)
+                  doing.map((item) => (
+                      <Card
+                          key={item.word}
+                          data={item}
+                          onClick={onClickXandOBtn}
+                          BUTTONS={BUTTONS}
+                      />
+                  ))
                 : done.length > 0 &&
                   done?.map((item) => <Card key={item.word} data={item} />)}
         </div>
