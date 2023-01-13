@@ -27,23 +27,32 @@ const Item = () => {
         setDoing(temp);
     };
 
-    const BUTTONS = [
+    const onClickComplete = (targetkey, target) => {
+        const addArray = doing.find((item) => item.word === target);
+        setDone([...done, addArray]);
+        const newArray = doing.filter((item) => item.word !== target);
+        setDoing(newArray);
+    };
+
+    const DOINGBUTTONS = [
         {
             id: 0,
             title: "X",
             target: "x_count",
             color: "#ED6A5A",
+            onclick: onClickXandOBtn,
         },
         {
             id: 1,
             title: "O",
             target: "o_count",
             color: "#E6EBE0",
+            onclick: onClickXandOBtn,
         },
         {
             id: 2,
             title: "암기완료",
-            onClick: null,
+            onclick: onClickComplete,
             round: "rounded-r-lg",
             color: "#9BC1BC",
         },
@@ -76,7 +85,7 @@ const Item = () => {
                           key={item.word}
                           data={item}
                           onClick={onClickXandOBtn}
-                          BUTTONS={BUTTONS}
+                          BUTTONS={DOINGBUTTONS}
                       />
                   ))
                 : done.length > 0 &&

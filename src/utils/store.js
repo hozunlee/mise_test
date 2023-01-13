@@ -7,7 +7,7 @@ const doingState = atom({
 
 const doneState = atom({
     key: "doneState",
-    default: {},
+    default: [],
 });
 
 export { doingState, doneState };
