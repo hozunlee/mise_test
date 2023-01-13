@@ -5,10 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { doingState } from "../utils/store";
-import { useRecoilState, useRecoilValue } from "recoil";
-
-const Card = ({ data, onClick, BUTTONS }) => {
+const Card = ({ data, BUTTONS }) => {
     const [isTrans, setIsTrans] = useState(true);
 
     const onTrans = () => {
@@ -54,7 +51,7 @@ const Card = ({ data, onClick, BUTTONS }) => {
                 {BUTTONS?.map((item) => (
                     <div key={item.id}>
                         <button
-                            onClick={() => onClick(item.target, data.word)}
+                            onClick={() => item.onclick(data.word, item.target)}
                             className={`w-full h-full p-7 text-sm bg-[${item.color}] ${item.round}`}
                         >
                             {item.title}
