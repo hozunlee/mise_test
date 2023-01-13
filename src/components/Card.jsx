@@ -9,24 +9,35 @@ import { doingState } from "../utils/store";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 const Card = ({ data }) => {
-    const { doing, setDoing } = useRecoilState(doingState);
-
+    const [doing, setDoing] = useRecoilState(doingState);
     const [isTrans, setIsTrans] = useState(true);
 
     const onTrans = () => {
         setIsTrans((prev) => !prev);
     };
 
+    const onClickXandOBtn = (target) => {
+        const targetIndex = doing.findIndex(
+            (target) => target.word === data.word
+        );
+        let temp = [...doing];
+        temp[targetIndex] = {
+            ...temp[targetIndex],
+            [target]: data.x_count + 1,
+        };
+        setDoing(temp);
+    };
+
     const BUTTONS = [
         {
             id: 0,
             title: "X",
-            onClick: null,
+            target: "x_count",
         },
         {
             id: 1,
             title: "O",
-            onClick: null,
+            target: "o_count",
         },
         {
             id: 2,
@@ -48,8 +59,14 @@ const Card = ({ data }) => {
                 <div className="flex justify-between p-3 ">
                     <div className="flex flex-col w-full">
                         <div className="flex">
-                            <p>{data.o_count}</p>
-                            <p>{data.x_count}</p>
+                            <p>
+                                <i className="ri-blur-off-fill"></i>
+                                {data.x_count}
+                            </p>
+                            <p>
+                                <i className="ri-check-double-line"></i>
+                                {data.o_count}
+                            </p>
                         </div>
                         {data.word}
                     </div>
@@ -68,7 +85,11 @@ const Card = ({ data }) => {
             </SwiperSlide>
             <SwiperSlide className="!w-3/4 flex justify-between items-center h-full">
                 {BUTTONS.map((item) => (
-                    <CardButton key={item.id} button={item} />
+                    <CardButton
+                        key={item.id}
+                        button={item}
+                        onClick={onClickXandOBtn}
+                    />
                 ))}
             </SwiperSlide>
         </Swiper>

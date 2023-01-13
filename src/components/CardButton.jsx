@@ -1,7 +1,12 @@
-const CardButton = ({ button }) => {
+const CardButton = ({ button, onClick }) => {
     return (
         <div>
-            <button className="w-full h-full">{button.title}</button>
+            <button
+                onClick={() => onClick(button.target)}
+                className="w-full h-full"
+            >
+                {button.title}
+            </button>
         </div>
     );
 };

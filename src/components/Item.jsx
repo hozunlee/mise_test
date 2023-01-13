@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { doingState, doneState } from "../utils/store";
 import Card from "./Card";
 
 const Item = () => {
-    const doing = useRecoilValue(doingState);
-    const done = useRecoilValue(doneState);
+    const [doing, setDoing] = useRecoilState(doingState);
+    console.log("🚀 ~ file: Item.jsx:8 ~ Item ~ doing", doing);
+    const [done, setDone] = useRecoilState(doneState);
     const [taps, setTaps] = useState(true);
 
     const tapClick = (e) => {
-        console.log(e.target.value);
         setTaps((prev) => !prev);
     };
+
     return (
         <div>
             <div className="flex justify-between">
