@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useRecoilValue } from "recoil";
+import { showWordState } from "../utils/store";
 
 const Card = ({ data, BUTTONS }) => {
-    const [isTrans, setIsTrans] = useState(true);
+    const changeWord = useRecoilValue(showWordState);
+    const [isTrans, setIsTrans] = useState(false);
 
     const onTrans = () => {
         setIsTrans((prev) => !prev);
@@ -32,18 +35,26 @@ const Card = ({ data, BUTTONS }) => {
                                 {data.o_count}
                             </p>
                         </div>
-                        <p className="text-center">{data.word}</p>
+                        <p className="text-center">
+                            {changeWord ? data.trans : data.word}
+                        </p>
                     </div>
                     <button
                         className={
                             "w-full" +
-                            (isTrans
+                            (!isTrans
                                 ? ""
                                 : " border-l-2 border-blue-300 border-solid ")
                         }
                         onClick={onTrans}
                     >
-                        <p className="text-sm">{isTrans ? "" : data.trans}</p>
+                        <p className="text-sm">
+                            {isTrans
+                                ? changeWord
+                                    ? data.word
+                                    : data.trans
+                                : ""}
+                        </p>
                     </button>
                 </div>
             </SwiperSlide>
@@ -63,4 +74,4 @@ const Card = ({ data, BUTTONS }) => {
     );
 };
 
-export default Card;
+export default memo(Card);

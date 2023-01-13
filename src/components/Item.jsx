@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { doingState, doneState } from "../utils/store";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { doingState, doneState, showWordState } from "../utils/store";
 import Card from "./Card";
 import SortDetail from "./SortDetail";
 
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
     const [done, setDone] = useRecoilState(doneState);
+    const setChangeWord = useSetRecoilState(showWordState);
     const [openSortModal, setOpenSortModal] = useState(false);
     const [taps, setTaps] = useState(true);
 
@@ -89,13 +90,19 @@ const Item = () => {
                         암기완료
                     </button>
                 </ul>
-                <div className="flex">
-                    <div onClick={onOpenSortModalHandler}>
-                        <i className="ri-arrow-up-down-line"></i>
+                <div className="flex m-1">
+                    <div className="m-1 p-1">
+                        <i
+                            onClick={onOpenSortModalHandler}
+                            className="ri-arrow-up-down-line"
+                        ></i>
                     </div>
-                    <p>
-                        <i className="ri-shuffle-line"></i>
-                    </p>
+                    <div className="m-1 p-1">
+                        <i
+                            onClick={() => setChangeWord((prev) => !prev)}
+                            className="ri-shuffle-line"
+                        ></i>
+                    </div>
                 </div>
             </div>
 
