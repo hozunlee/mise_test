@@ -17,7 +17,7 @@ const Item = () => {
      * @param {string} targetkey x 또는 o의 key 값 : o_count | x_count
      * @param {string} target btn count를 바꿀 word 값
      */
-    const onClickXandOBtn = (targetkey, target) => {
+    const onClickXandOBtn = (target, targetkey) => {
         const targetIndex = doing.findIndex((item) => item.word === target);
         let temp = [...doing];
         temp[targetIndex] = {
@@ -27,11 +27,18 @@ const Item = () => {
         setDoing(temp);
     };
 
-    const onClickComplete = (targetkey, target) => {
+    const onClickComplete = (target) => {
         const addArray = doing.find((item) => item.word === target);
         setDone([...done, addArray]);
         const newArray = doing.filter((item) => item.word !== target);
         setDoing(newArray);
+    };
+
+    const onClickReturnDoing = (target) => {
+        const addArray = done.find((item) => item.word === target);
+        setDoing([...doing, addArray]);
+        const newArray = done.filter((item) => item.word !== target);
+        setDone(newArray);
     };
 
     const DOINGBUTTONS = [
@@ -55,6 +62,14 @@ const Item = () => {
             onclick: onClickComplete,
             round: "rounded-r-lg",
             color: "#9BC1BC",
+        },
+    ];
+    const DONEBUTTON = [
+        {
+            id: 0,
+            title: "재학습",
+            color: "#36C9C6",
+            onclick: onClickReturnDoing,
         },
     ];
 
@@ -84,12 +99,13 @@ const Item = () => {
                       <Card
                           key={item.word}
                           data={item}
-                          onClick={onClickXandOBtn}
                           BUTTONS={DOINGBUTTONS}
                       />
                   ))
                 : done.length > 0 &&
-                  done?.map((item) => <Card key={item.word} data={item} />)}
+                  done?.map((item) => (
+                      <Card key={item.word} data={item} BUTTONS={DONEBUTTON} />
+                  ))}
         </div>
     );
 };
