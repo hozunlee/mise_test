@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { doingState, doneState } from "../utils/store";
 import Card from "./Card";
+import SortDetail from "./SortDetail";
 
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
     const [done, setDone] = useRecoilState(doneState);
+    const [openSortModal, setOpenSortModal] = useState(false);
     const [taps, setTaps] = useState(true);
 
     const tapClick = (e) => {
@@ -73,6 +75,9 @@ const Item = () => {
         },
     ];
 
+    const onOpenSortModalHandler = () => {
+        setOpenSortModal((prev) => !prev);
+    };
     return (
         <div>
             <div className="flex justify-between">
@@ -85,14 +90,15 @@ const Item = () => {
                     </button>
                 </ul>
                 <div className="flex">
-                    <p>
+                    <div onClick={onOpenSortModalHandler}>
                         <i className="ri-arrow-up-down-line"></i>
-                    </p>
+                    </div>
                     <p>
                         <i className="ri-shuffle-line"></i>
                     </p>
                 </div>
             </div>
+
             {taps
                 ? doing.length > 0 &&
                   doing.map((item) => (
@@ -106,6 +112,9 @@ const Item = () => {
                   done?.map((item) => (
                       <Card key={item.word} data={item} BUTTONS={DONEBUTTON} />
                   ))}
+            {openSortModal && (
+                <SortDetail setHandleModal={onOpenSortModalHandler} />
+            )}
         </div>
     );
 };
