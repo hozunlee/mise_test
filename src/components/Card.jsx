@@ -25,28 +25,28 @@ const Card = ({ data, onClick, BUTTONS }) => {
             <SwiperSlide>
                 <div className="flex justify-between p-3 ">
                     <div className="flex flex-col w-full">
-                        <div className="flex">
-                            <p>
-                                <i className="ri-blur-off-fill"></i>
+                        <div className="flex text-sm text-gray-300">
+                            <p className="mr-2">
+                                <i className="ri-close-circle-fill text-red-500"></i>
                                 {data.x_count}
                             </p>
                             <p>
-                                <i className="ri-check-double-line"></i>
+                                <i className="ri-emotion-line text-green-500"></i>
                                 {data.o_count}
                             </p>
                         </div>
-                        {data.word}
+                        <p className="text-center">{data.word}</p>
                     </div>
                     <button
                         className={
                             "w-full" +
                             (isTrans
                                 ? ""
-                                : "border-l-2 border-blue-300 border-solid ")
+                                : " border-l-2 border-blue-300 border-solid ")
                         }
                         onClick={onTrans}
                     >
-                        {isTrans ? "" : data.trans}
+                        <p className="text-sm">{isTrans ? "" : data.trans}</p>
                     </button>
                 </div>
             </SwiperSlide>
