@@ -4,12 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import CardButton from "./CardButton";
+
 import { doingState } from "../utils/store";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 const Card = ({ data, onClick, BUTTONS }) => {
-    const [doing, setDoing] = useRecoilState(doingState);
     const [isTrans, setIsTrans] = useState(true);
 
     const onTrans = () => {
@@ -17,7 +16,6 @@ const Card = ({ data, onClick, BUTTONS }) => {
     };
 
     return (
-        // <div className="border-4 flex  h-16 rounded-xl">
         <Swiper
             slidesPerView={"auto"}
             spaceBetween={14}
@@ -52,12 +50,12 @@ const Card = ({ data, onClick, BUTTONS }) => {
                     </button>
                 </div>
             </SwiperSlide>
-            <SwiperSlide className="!w-3/4 flex justify-between items-center h-full">
+            <SwiperSlide className="!w-3/4 flex items-center justify-end h-full">
                 {BUTTONS?.map((item) => (
                     <div key={item.id}>
                         <button
                             onClick={() => onClick(item.target, data.word)}
-                            className="w-full h-full"
+                            className={`w-full h-full p-7 text-sm bg-[${item.color}] ${item.round}`}
                         >
                             {item.title}
                         </button>

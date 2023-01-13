@@ -8,10 +8,15 @@ const Item = () => {
     const [done, setDone] = useRecoilState(doneState);
     const [taps, setTaps] = useState(true);
 
-    const tapClick = () => {
-        setTaps((prev) => !prev);
+    const tapClick = (e) => {
+        if (String(taps) !== e.target.value) setTaps((prev) => !prev);
     };
 
+    /**
+     *
+     * @param {string} targetkey x 또는 o의 key 값 : o_count | x_count
+     * @param {string} target btn count를 바꿀 word 값
+     */
     const onClickXandOBtn = (targetkey, target) => {
         const targetIndex = doing.findIndex((item) => item.word === target);
         let temp = [...doing];
@@ -27,17 +32,20 @@ const Item = () => {
             id: 0,
             title: "X",
             target: "x_count",
+            color: "#ED6A5A",
         },
         {
             id: 1,
             title: "O",
             target: "o_count",
+            color: "#E6EBE0",
         },
         {
             id: 2,
             title: "암기완료",
             onClick: null,
             round: "rounded-r-lg",
+            color: "#9BC1BC",
         },
     ];
 
@@ -45,8 +53,12 @@ const Item = () => {
         <div>
             <div className="flex justify-between">
                 <ul>
-                    <button onClick={(e) => tapClick(e)}>학습중</button>
-                    <button onClick={tapClick}>암기완료</button>
+                    <button value={true} onClick={(e) => tapClick(e)}>
+                        학습중
+                    </button>
+                    <button value={false} onClick={(e) => tapClick(e)}>
+                        암기완료
+                    </button>
                 </ul>
                 <div className="flex">
                     <p>
