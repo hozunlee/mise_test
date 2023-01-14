@@ -12,6 +12,7 @@ function App() {
     const setInitData = useSetRecoilState(doingState);
     const [loading, setLoading] = useState(true);
 
+    // 앱 실행 시 api 호출 및 recoil state 저장
     useEffect(() => {
         const source = axios.CancelToken.source();
         (async () => {

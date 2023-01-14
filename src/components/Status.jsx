@@ -1,12 +1,17 @@
 import { useRecoilValue } from "recoil";
 import { doingState, doneState } from "../utils/store";
 
+/**
+ *
+ * @returns status bar UI 출력
+ */
 const Status = () => {
+    // 화면에 보여줄 값 계산
     const doingCount = useRecoilValue(doingState).length;
     const doneCount = useRecoilValue(doneState).length ?? 0;
-
     const totalCount = doneCount + doingCount;
     const doneLate = (doneCount / totalCount) * 100;
+
     return (
         <div className="flex justify-between h-16 items-center">
             <div className="flex border p-3 mr-1 w-full justify-between rounded-lg bg-gray-100  text-sm h-12 ">
