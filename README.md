@@ -76,8 +76,9 @@ src
 
 ## ⚒️ 기술 스택 / 라이브러리
 
-Javascirpt, React, tailwindCSS, recoil
-axios, remixicon, swiper, classnames, react-spinners
+`Javascirpt`, `React`, `tailwindCSS`, `recoil`
+
+`axios`, `remixicon`, `swiper`, `classnames`, `react-spinners`
 
 ## 📝 Commit message Convention 전략
 
