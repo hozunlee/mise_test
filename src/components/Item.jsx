@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { doingState, doneState, showWordState } from "../utils/store";
 import Card from "./Card";
+import ChangeWordDetail from "./ChangeWordDetail";
 import SortDetail from "./SortDetail";
 
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
     const [done, setDone] = useRecoilState(doneState);
-    const setChangeWord = useSetRecoilState(showWordState);
+
     const [openSortModal, setOpenSortModal] = useState(false);
+    const [openChangeWordModal, setOpenChangeWordModal] = useState(false);
     const [taps, setTaps] = useState(true);
 
     const tapClick = (e) => {
@@ -79,6 +81,9 @@ const Item = () => {
     const onOpenSortModalHandler = () => {
         setOpenSortModal((prev) => !prev);
     };
+    const onOpenChangeWordModalHandler = () => {
+        setOpenChangeWordModal((prev) => !prev);
+    };
     return (
         <div>
             <div className="flex justify-between">
@@ -99,7 +104,7 @@ const Item = () => {
                     </div>
                     <div className="m-1 p-1">
                         <i
-                            onClick={() => setChangeWord((prev) => !prev)}
+                            onClick={onOpenChangeWordModalHandler}
                             className="ri-shuffle-line"
                         ></i>
                     </div>
@@ -121,6 +126,11 @@ const Item = () => {
                   ))}
             {openSortModal && (
                 <SortDetail setHandleModal={onOpenSortModalHandler} />
+            )}
+            {openChangeWordModal && (
+                <ChangeWordDetail
+                    setHandleModal={onOpenChangeWordModalHandler}
+                />
             )}
         </div>
     );
