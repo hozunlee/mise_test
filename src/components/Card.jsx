@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import classnames from "classnames";
+
 import { useRecoilValue } from "recoil";
 import { allShowWordState, changeWordState } from "../utils/store";
 
@@ -39,7 +41,6 @@ const Card = ({ data, BUTTONS }) => {
                         <p className="text-center">
                             {changeWord ? data.trans : data.word}
                         </p>
-                        <p>　 </p>
                     </div>
                     <button
                         className={
@@ -61,16 +62,26 @@ const Card = ({ data, BUTTONS }) => {
                 </div>
             </SwiperSlide>
             <SwiperSlide className="!w-3/4 flex items-center justify-end h-full">
-                {BUTTONS?.map((item) => (
-                    <div key={item.id}>
-                        <button
-                            onClick={() => item.onclick(data.word, item.target)}
-                            className={`w-full h-full p-7 text-sm bg-[${item.color}] ${item.round}`}
-                        >
-                            {item.title}
-                        </button>
-                    </div>
-                ))}
+                {BUTTONS?.map((item) => {
+                    const classStr = classnames(
+                        `w-full h-full p-7 text-sm ${item.color} ${
+                            item.round ? item.round : ""
+                        } `
+                    );
+                    console.log("item.color :>> ", item.color);
+                    return (
+                        <div key={item.id}>
+                            <button
+                                onClick={() =>
+                                    item.onclick(data.word, item.target)
+                                }
+                                className={classStr}
+                            >
+                                {item.title}
+                            </button>
+                        </div>
+                    );
+                })}
             </SwiperSlide>
         </Swiper>
     );
