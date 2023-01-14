@@ -68,7 +68,6 @@ const Card = ({ data, BUTTONS }) => {
                             item.round ? item.round : ""
                         } `
                     );
-                    console.log("item.color :>> ", item.color);
                     return (
                         <div key={item.id}>
                             <button
