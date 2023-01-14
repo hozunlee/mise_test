@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import Item from "./components/Item";
+import { IsLoading } from "./components/Loading";
 
 import Nav from "./components/Nav";
 import Status from "./components/Status";
@@ -10,6 +11,7 @@ import { doingState } from "./utils/store";
 function App() {
     const setInitData = useSetRecoilState(doingState);
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const source = axios.CancelToken.source();
         (async () => {
@@ -43,7 +45,7 @@ function App() {
         <div className="p-3">
             <Nav />
             {loading ? (
-                "로딩중"
+                <IsLoading />
             ) : (
                 <div>
                     <Status />
