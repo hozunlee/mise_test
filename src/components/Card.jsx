@@ -39,6 +39,7 @@ const Card = ({ data, BUTTONS }) => {
                         <p className="text-center">
                             {changeWord ? data.trans : data.word}
                         </p>
+                        <p>　 </p>
                     </div>
                     <button
                         className={

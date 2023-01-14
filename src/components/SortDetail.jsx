@@ -23,7 +23,7 @@ const SortDetail = ({ setHandleModal }) => {
 
     return (
         <div
-            className="w-full h-screen z-50 fixed left-0 top-0 flex justify-center items-end bg-black bg-opacity-70 text-cente"
+            className="w-full h-screen z-50 fixed left-0 top-0 flex justify-center items-end bg-black bg-opacity-70 "
             onClick={setHandleModal}
         >
             <div className="bg-white rounded w-full md:w-1/3">

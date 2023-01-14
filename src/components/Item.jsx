@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { doingState, doneState, showWordState } from "../utils/store";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { doingState, doneState } from "../utils/store";
+
 import Card from "./Card";
 import ChangeWordDetail from "./ChangeWordDetail";
 import SortDetail from "./SortDetail";
@@ -90,7 +91,11 @@ const Item = () => {
             <TopButton />
             <div className="flex justify-between">
                 <ul>
-                    <button value={true} onClick={(e) => tapClick(e)}>
+                    <button
+                        className="mt-2.5 mr-1 p-1"
+                        value={true}
+                        onClick={(e) => tapClick(e)}
+                    >
                         학습중
                     </button>
                     <button value={false} onClick={(e) => tapClick(e)}>

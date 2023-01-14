@@ -8,7 +8,7 @@ const ChangeWordDetail = ({ setHandleModal }) => {
         setChangeWord((prev) => !prev);
     };
     return (
-        <div className="w-full h-screen z-50 fixed left-0 top-0 flex justify-center items-end bg-black bg-opacity-70 text-cente">
+        <div className="w-full h-screen z-50 fixed left-0 top-0 flex justify-center items-end bg-black bg-opacity-70 ">
             <div className="bg-white rounded w-full md:w-1/3">
                 <div className="border-b px-4 py-2 flex justify-between items-end">
                     <h3 className="font-extrabold text-center w-full">
