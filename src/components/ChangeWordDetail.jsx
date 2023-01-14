@@ -1,8 +1,8 @@
 import { useSetRecoilState } from "recoil";
-import { showWordState } from "../utils/store";
+import { changeWordState } from "../utils/store";
 
 const ChangeWordDetail = ({ setHandleModal }) => {
-    const setChangeWord = useSetRecoilState(showWordState);
+    const setChangeWord = useSetRecoilState(changeWordState);
 
     const onChangeWord = () => {
         setChangeWord((prev) => !prev);

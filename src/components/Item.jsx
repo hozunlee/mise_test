@@ -4,6 +4,7 @@ import { doingState, doneState, showWordState } from "../utils/store";
 import Card from "./Card";
 import ChangeWordDetail from "./ChangeWordDetail";
 import SortDetail from "./SortDetail";
+import TopButton from "./TopButton";
 
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
@@ -86,6 +87,7 @@ const Item = () => {
     };
     return (
         <div>
+            <TopButton />
             <div className="flex justify-between">
                 <ul>
                     <button value={true} onClick={(e) => tapClick(e)}>

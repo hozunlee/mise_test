@@ -5,10 +5,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useRecoilValue } from "recoil";
-import { showWordState } from "../utils/store";
+import { allShowWordState, changeWordState } from "../utils/store";
 
 const Card = ({ data, BUTTONS }) => {
-    const changeWord = useRecoilValue(showWordState);
+    const changeWord = useRecoilValue(changeWordState);
+    const AllChangeShow = useRecoilValue(allShowWordState);
     const [isTrans, setIsTrans] = useState(false);
 
     const onTrans = () => {
@@ -42,14 +43,14 @@ const Card = ({ data, BUTTONS }) => {
                     <button
                         className={
                             "w-full" +
-                            (!isTrans
-                                ? ""
-                                : " border-l-2 border-blue-300 border-solid ")
+                            (AllChangeShow | isTrans
+                                ? " border-l-2 border-blue-300 border-solid "
+                                : " ")
                         }
                         onClick={onTrans}
                     >
                         <p className="text-sm">
-                            {isTrans
+                            {AllChangeShow | isTrans
                                 ? changeWord
                                     ? data.word
                                     : data.trans

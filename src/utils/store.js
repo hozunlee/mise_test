@@ -10,9 +10,14 @@ const doneState = atom({
     default: [],
 });
 
-const showWordState = atom({
+const changeWordState = atom({
+    key: "changeWordState",
+    default: false,
+});
+
+const allShowWordState = atom({
     key: "showWordState",
     default: false,
 });
 
-export { doingState, doneState, showWordState };
+export { doingState, doneState, changeWordState, allShowWordState };
