@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const doingState = atom({
     key: "doingState",
-    default: {},
+    default: [],
 });
 
 const doneState = atom({
@@ -12,7 +12,7 @@ const doneState = atom({
 
 const showWordState = atom({
     key: "showWordState",
-    default: true,
+    default: false,
 });
 
 export { doingState, doneState, showWordState };
