@@ -7,6 +7,10 @@ import ChangeWordDetail from "./ChangeWordDetail";
 import SortDetail from "./SortDetail";
 import TopButton from "./TopButton";
 
+/**
+ *
+ * @returns 학습관련 메인 UI
+ */
 const Item = () => {
     const [doing, setDoing] = useRecoilState(doingState);
     const [done, setDone] = useRecoilState(doneState);
@@ -15,6 +19,7 @@ const Item = () => {
     const [openChangeWordModal, setOpenChangeWordModal] = useState(false);
     const [taps, setTaps] = useState(true);
 
+    // 학습 중 / 학습 완료 탭 제어 함수
     const tapClick = (e) => {
         if (String(taps) !== e.target.value) setTaps((prev) => !prev);
     };
@@ -34,6 +39,10 @@ const Item = () => {
         setDoing(temp);
     };
 
+    /**
+     * doing에서 암기완료 버튼을 클릭 시 done 으로 옮기는 함수
+     * @param {string} target 완료 시킬 단어
+     */
     const onClickComplete = (target) => {
         const addArray = doing.find((item) => item.word === target);
         setDone([...done, addArray]);
@@ -41,6 +50,10 @@ const Item = () => {
         setDoing(newArray);
     };
 
+    /**
+     * done 재학습 버튼을 클릭 시 doing 으로 옮기는 함수
+     * @param {string} target 학습 중으로 이동시킬 단어
+     */
     const onClickReturnDoing = (target) => {
         const addArray = done.find((item) => item.word === target);
         setDoing([...doing, addArray]);
@@ -48,19 +61,34 @@ const Item = () => {
         setDone(newArray);
     };
 
+    // 모달 open/close 제어 함수
+    const onOpenSortModalHandler = () => {
+        setOpenSortModal((prev) => !prev);
+    };
+
+    // 학습 중일 땐 모달창 open
+    // 암기완료 일 땐 배열 랜덤
+    const onOpenChangeWordModalHandler = () => {
+        if (taps) {
+            setOpenChangeWordModal((prev) => !prev);
+        } else {
+            setDone([...done].sort(() => Math.random() - 0.5));
+        }
+    };
+
     const DOINGBUTTONS = [
         {
             id: 0,
             title: "X",
             target: "x_count",
-            color: "#ED6A5A",
+            color: "bg-[#ED6A5A]",
             onclick: onClickXandOBtn,
         },
         {
             id: 1,
             title: "O",
             target: "o_count",
-            color: "#E6EBE0",
+            color: "bg-[#E6EBE0]",
             onclick: onClickXandOBtn,
         },
         {
@@ -68,24 +96,18 @@ const Item = () => {
             title: "암기완료",
             onclick: onClickComplete,
             round: "rounded-r-lg",
-            color: "#9BC1BC",
+            color: "bg-[#9BC1BC]",
         },
     ];
     const DONEBUTTON = [
         {
             id: 0,
             title: "재학습",
-            color: "#36C9C6",
+            color: "bg-[#36C9C6]",
             onclick: onClickReturnDoing,
         },
     ];
 
-    const onOpenSortModalHandler = () => {
-        setOpenSortModal((prev) => !prev);
-    };
-    const onOpenChangeWordModalHandler = () => {
-        setOpenChangeWordModal((prev) => !prev);
-    };
     return (
         <div>
             <TopButton />

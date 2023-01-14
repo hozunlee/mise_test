@@ -1,6 +1,11 @@
 import { useRecoilState } from "recoil";
 import { doingState } from "../utils/store";
 
+/**
+ *
+ * @param {function} setHandleModal 모달창의 open /close 제어 함수
+ * @returns 정렬기능 수행하는 modal UI
+ */
 const SortDetail = ({ setHandleModal }) => {
     const [doing, setDoing] = useRecoilState(doingState);
 
@@ -14,11 +19,11 @@ const SortDetail = ({ setHandleModal }) => {
         setDoing(temp);
     };
     const lessCountSort = () => {
-        let temp = [...doing];
-        temp.sort((a, b) => {
-            return a.x_count + a.o_count - (b.x_count + b.o_count);
-        });
-        setDoing(temp);
+        setDoing(
+            [...doing].sort((a, b) => {
+                return a.x_count + a.o_count - (b.x_count + b.o_count);
+            })
+        );
     };
 
     return (
